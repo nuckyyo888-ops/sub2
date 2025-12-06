@@ -1,0 +1,38 @@
+proxies:
+  # Hysteria2 节点
+  - name: "HY2-Node"
+    type: hysteria2
+    server: 154.3.39.69
+    port: 443
+    password: "9VW3HzZV4a"
+    sni: ts1.tc.mm.bing.net
+    skip-cert-verify: true
+    alpn:
+      - h3
+    fast-open: false
+
+  # VLESS + Reality 节点
+  - name: "VLESS-Reality"
+    type: vless
+    server: 154.3.39.69
+    port: 443
+    uuid: "29ecaa5e-cc62-4132-b051-5358e2406507"
+    flow: xtls-rprx-vision
+    network: tcp
+    tls: true
+    fp: chrome
+    sni: go.microsoft.com
+    security: reality
+    pbk: "P5MqpMJHVj8U8cJVxky5hyE5cRk2kXrZeCf4i7F2nGo"
+    sid: "ea0cc6f8"
+    skip-cert-verify: true
+
+proxy-groups:
+  - name: "Proxy"
+    type: select
+    proxies:
+      - HY2-Node
+      - VLESS-Reality
+
+rules:
+  - MATCH,Proxy
