@@ -21,48 +21,14 @@ proxies:
     auth-str: AUaL1QK9Gz
     sni: go.microsoft.com
     skip-cert-verify: true
-    fast-open: true
-
-  - name: trojan-36082
-    type: trojan
-    server: 154.17.228.99
-    port: 36082
-    password: AUaL1QK9Gz
-    network: ws
-    sni: tag.demandbase.com
-    skip-cert-verify: true
-    ws-opts:
-      path: /abd
-      headers:
-        Host: cdn.bizibly.com
-    alpn:
-      - h3
-      - h2
-      - http/1.1
-
-  - name: tuic
-    type: tuic
-    server: 154.17.228.99
-    port: 42395
-    uuid: 169c77a8-6a93-4763-9057-372b493031ea
-    password: AUaL1QK9Gz
-    sni: tag.demandbase.com
-    skip-cert-verify: true
-    alpn:
-      - h3
-      - h2
-      - http/1.1
-    congestion_control: bbr
+    fast-open: false
 
 proxy-groups:
-  - name: "auto"
+  - name: auto
     type: select
     proxies:
       - vless-reality
       - hysteria2
-      - trojan-36082
-      - tuic
 
 rules:
   - MATCH,auto
-
